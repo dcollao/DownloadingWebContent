@@ -10,6 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var webView: UIWebView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -21,8 +22,13 @@ class ViewController: UIViewController {
             (data, response, error) in
             
             if error == nil {
-                var urlContent = NSString(data: data!, encoding: NSUTF8StringEncoding)
-                print(urlContent)
+                let urlContent = NSString(data: data!, encoding: NSUTF8StringEncoding)
+                
+                //Desactivate async webview :)
+                dispatch_async(dispatch_get_main_queue()){
+                    self.webView.loadHTMLString(urlContent! as String, baseURL: nil)
+                }
+                
             }
             
         }
