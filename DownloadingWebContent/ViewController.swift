@@ -12,12 +12,28 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        //First we need to define the url of the website ...
+        let url = NSURL(string: "http://www.stackoverflow.com")
+        
+        //Then we create a task ... (what I going to grab)
+        let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {
+            (data, response, error) in
+            
+            if error == nil {
+                var urlContent = NSString(data: data!, encoding: NSUTF8StringEncoding)
+                print(urlContent)
+            }
+            
+        }
+        
+        task.resume()
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
 
